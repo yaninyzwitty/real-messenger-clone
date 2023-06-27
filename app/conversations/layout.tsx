@@ -16,8 +16,6 @@ export default async function ConversationsLayout({
     <Sidebar>
       <div className="h-full">
         <Conversations
-          // @ts-ignore
-
           users={users}
           title="Messages"
           initialItems={conversations}

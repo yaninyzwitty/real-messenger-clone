@@ -1,24 +1,22 @@
 "use client";
 
-import { useCallback, useMemo } from "react";
-import { useRouter } from "next/navigation";
-import { Conversation, Message, User } from "@prisma/client";
-import { format } from "date-fns";
-import { useSession } from "next-auth/react";
+import {useCallback, useMemo} from "react";
+import {useRouter} from "next/navigation";
+import {Conversation, Message, User} from "@prisma/client";
+import {format} from "date-fns";
+import {useSession} from "next-auth/react";
 import clsx from "clsx";
-import { FullConversationType } from "@/typings";
+import {FullConversationType} from "@/typings";
 import useOtherUser from "@/hooks/useOtherUser";
 import Avatar from "./Avatar";
+import AvatarGroup from "./AvatarGroup";
 
 interface ConversationBoxProps {
   data: FullConversationType;
   selected?: boolean;
 }
 
-const ConversationBox: React.FC<ConversationBoxProps> = ({
-  data,
-  selected,
-}) => {
+const ConversationBox: React.FC<ConversationBoxProps> = ({data, selected}) => {
   const otherUser = useOtherUser(data);
   const session = useSession();
   const router = useRouter();
@@ -83,7 +81,11 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({
         selected ? "bg-neutral-100" : "bg-white"
       )}
     >
-      <Avatar user={otherUser} />
+      {data?.isGroup ? (
+        <AvatarGroup users={data.users} />
+      ) : (
+        <Avatar user={otherUser} />
+      )}
       <div className="min-w-0 flex-1">
         <div className="focus:outline-none">
           <div className="flex justify-between items-center mb-1">

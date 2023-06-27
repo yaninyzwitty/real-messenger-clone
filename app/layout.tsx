@@ -1,11 +1,12 @@
 import "./globals.css";
-import { Inter } from "next/font/google";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import {Inter} from "next/font/google";
+import {getServerSession} from "next-auth";
+import {authOptions} from "@/pages/api/auth/[...nextauth]";
 import Providers from "./Providers";
 import ClientProvider from "./ClientProvider";
+import ActiveStatus from "@/components/ActiveStatus";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({subsets: ["latin"]});
 
 export const metadata = {
   title: "Messenger",
@@ -23,6 +24,7 @@ export default async function RootLayout({
       <body className={inter.className}>
         <Providers session={session}>
           <ClientProvider />
+          <ActiveStatus />
 
           {children}
         </Providers>
