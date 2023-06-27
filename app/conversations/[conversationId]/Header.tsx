@@ -24,7 +24,7 @@ function Header({conversation}: Props) {
     }
 
     return isActive ? "Active" : "Offline";
-  }, [conversation]);
+  }, [conversation, isActive]);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   return (
